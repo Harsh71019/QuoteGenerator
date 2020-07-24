@@ -1,5 +1,10 @@
-// Get Quote from API
+const quoteContainer = document.getElementById("quote-container");
+const quoteText = document.getElementById("quote");
+const authorText = document.getElementById("author");
+const twitterBtn = document.getElementById("twitter");
+const newQuoteBtn = document.getElementById("new-quote");
 
+// Get Quote from API
 async function getQuote() {
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
   const apiUrl =
@@ -7,9 +12,10 @@ async function getQuote() {
   try {
     const response = await fetch(proxyUrl + apiUrl);
     const data = await response.json();
-    console.log(data);
+    authorText.innerText = data.quoteAuthor;
+    quoteText.innerText = data.quoteText;
   } catch {
-    console.log("Whoops no Quote", error);
+    getQuote();
   }
 }
 
